@@ -9,9 +9,6 @@ import picocli.CommandLine.Option
 @Dependent
 open class Entrypoint(private val downloader: Downloader, private val finder: Finder) : Runnable {
 
-    @Option(names = ["-v", "--verbose"], defaultValue = "false")
-    var verbose: Boolean? = null
-
     @Option(names = ["-d", "--day"])
     var day: Int? = null
 
@@ -28,10 +25,6 @@ open class Entrypoint(private val downloader: Downloader, private val finder: Fi
     override fun run() {
         val solver = finder.findSolver(parsedDay, parsedPart, parsedYear)
         val input = downloader.loadInput(parsedDay, parsedYear)
-
-        if (verbose == true) {
-            Log.info("The input is: \n\n$input\n")
-        }
 
         val solution = solver.solve(input)
 
