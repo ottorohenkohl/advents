@@ -4,6 +4,8 @@ import io.quarkus.logging.Log
 import jakarta.enterprise.context.Dependent
 import picocli.CommandLine.Command
 import picocli.CommandLine.Option
+import java.time.Duration
+import java.time.LocalDateTime
 
 @Command
 @Dependent
@@ -26,8 +28,13 @@ open class Entrypoint(private val downloader: Downloader, private val finder: Fi
         val solver = finder.findSolver(parsedDay, parsedPart, parsedYear)
         val input = downloader.loadInput(parsedDay, parsedYear)
 
+        val before = LocalDateTime.now()
         val solution = solver.solve(input)
+        val after = LocalDateTime.now()
 
-        Log.info("The solution is: \n\n$solution\n")
+        val duration = Duration.between(before, after)
+
+        Log.info("The solution is: $solution")
+        Log.info("Solution was calculated in: ${duration.toSeconds()}s and ${duration.toMillis()} ms")
     }
 }
