@@ -3,8 +3,7 @@ package de.ottorohenkohl.riddle.twentyfour.four
 import de.ottorohenkohl.riddle.Riddle
 import jakarta.enterprise.context.Dependent
 
-@Dependent
-@Riddle(day = 4, part = 2, year = 2024)
+@Dependent @Riddle(day = 4, part = 2, year = 2024)
 class Two : Both() {
 
     companion object {
