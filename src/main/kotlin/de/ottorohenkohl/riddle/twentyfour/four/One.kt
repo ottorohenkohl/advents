@@ -13,8 +13,8 @@ class One : Both() {
         private val DIAGONAL_BACKWARD = "(?=(X.{${LINE_LENGTH - 1}}M.{${LINE_LENGTH - 1}}A.{${LINE_LENGTH - 1}}S))".toRegex(option = RegexOption.DOT_MATCHES_ALL)
     }
 
-    override fun solve(input: String): String {
-        return (once(input) + once(input.reversed())).toString()
+    override fun solve(input: String): Long {
+        return (once(input) + once(input.reversed())).toLong()
     }
 
     private fun once(input: String): Int {

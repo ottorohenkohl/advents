@@ -6,10 +6,10 @@ import jakarta.enterprise.context.Dependent
 @Dependent @Riddle(day = 5, part = 1, year = 2024)
 class One : Both() {
 
-    override fun solve(input: String): String {
+    override fun solve(input: String): Long {
         val priorityMap = input.priorityMap()
         val validUpdates = input.updateRows().filter { row -> row.findInvalid(priorityMap).none { it } }
 
-        return validUpdates.sumOf { it[it.size / 2] }.toString()
+        return validUpdates.sumOf { it[it.size / 2] }.toLong()
     }
 }

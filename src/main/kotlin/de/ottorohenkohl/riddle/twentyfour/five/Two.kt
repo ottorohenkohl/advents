@@ -6,11 +6,11 @@ import jakarta.enterprise.context.Dependent
 @Dependent @Riddle(day = 5, part = 2, year = 2024)
 class Two : Both() {
 
-    override fun solve(input: String): String {
+    override fun solve(input: String): Long {
         val priorityMap = input.priorityMap()
         val invalidUpdates = input.updateRows().filter { row -> row.findInvalid(priorityMap).any { it } }
 
-        return invalidUpdates.map { it.fixUpdate(priorityMap) }.sumOf { it[it.size / 2] }.toString()
+        return invalidUpdates.map { it.fixUpdate(priorityMap) }.sumOf { it[it.size / 2] }.toLong()
     }
 
     private fun List<Int>.fixUpdate(priorityMap: Map<Int, Set<Int>>): List<Int> {
