@@ -20,21 +20,25 @@ open class Entrypoint(private val downloader: Downloader, private val finder: Fi
     @Option(names = ["-y", "--year"])
     var year: Int? = null
 
-    val parsedDay get() = day ?: throw IllegalArgumentException("No day specified")
-    val parsedPart get() = part ?: throw IllegalArgumentException("No part specified")
-    val parsedYear get() = year ?: throw IllegalArgumentException("No year specified")
+    private val parsedDay get() = day ?: throw IllegalArgumentException("No day specified")
+    private val parsedPart get() = part ?: throw IllegalArgumentException("No part specified")
+    private val parsedYear get() = year ?: throw IllegalArgumentException("No year specified")
 
     override fun run() {
-        val solver = finder.findSolver(parsedDay, parsedPart, parsedYear)
-        val input = downloader.loadInput(parsedDay, parsedYear)
+        try {
+            val solver = finder.findSolver(parsedDay, parsedPart, parsedYear)
+            val input = downloader.loadInput(parsedDay, parsedYear)
 
-        val before = LocalDateTime.now()
-        val solution = solver.solve(input)
-        val after = LocalDateTime.now()
+            val before = LocalDateTime.now()
+            val solution = solver.solve(input)
+            val after = LocalDateTime.now()
 
-        val duration = Duration.between(before, after)
+            val duration = Duration.between(before, after)
 
-        Log.info("The solution is: $solution")
-        Log.info("Solution was calculated in: ${duration.toSeconds()}s and ${duration.toMillis()} ms")
+            Log.info("The solution is: $solution")
+            Log.info("Solution was calculated in: ${duration.toSeconds()}s and ${duration.toMillis()} ms")
+        } catch (exception: IllegalArgumentException) {
+            Log.error(exception.message)
+        }
     }
 }
