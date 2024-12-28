@@ -6,7 +6,7 @@ import jakarta.enterprise.context.Dependent
 @Dependent @Riddle(day = 1, part = 2, year = 2024)
 class Second : Both() {
 
-    override fun solve(input: String): String {
+    override fun solve(input: String): Long {
         val columns = parseColumns(input)
 
         val frequenciesLeft = columns.map { it.first }.groupingBy { it }.eachCount()
@@ -14,6 +14,6 @@ class Second : Both() {
 
         val scores = frequenciesLeft.map { it.key * it.value * (frequenciesRight[it.key] ?: 0) }
 
-        return scores.sum().toString()
+        return scores.sum().toLong()
     }
 }

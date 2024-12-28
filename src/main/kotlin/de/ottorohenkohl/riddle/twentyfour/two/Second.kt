@@ -3,11 +3,12 @@ package de.ottorohenkohl.riddle.twentyfour.two
 import de.ottorohenkohl.riddle.Riddle
 import jakarta.enterprise.context.Dependent
 
-@Dependent @Riddle(day = 2, part = 2, year = 2024)
+@Dependent
+@Riddle(day = 2, part = 2, year = 2024)
 class Second : Both() {
 
-    override fun solve(input: String): String {
-        return parseColumns(input).count { it.validVariation() }.toString()
+    override fun solve(input: String): Long {
+        return parseColumns(input).count { it.validVariation() }.toLong()
     }
 
     private fun List<Int>.validVariation(): Boolean {

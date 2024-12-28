@@ -10,10 +10,10 @@ class Two : Both() {
     @field:Riddle(day = 6, part = 1, year = 2024)
     private lateinit var one: One
 
-    override fun solve(input: String): String {
+    override fun solve(input: String): Long {
         val relevant = one.solve(input).let { one.visited }.map { it.first }
 
-        return input.filterIndexed { index, _ -> variation(input, index, relevant) }.count().toString()
+        return input.filterIndexed { index, _ -> variation(input, index, relevant) }.count().toLong()
     }
 
     private fun variation(input: String, index: Int, relevant: List<Position>): Boolean {

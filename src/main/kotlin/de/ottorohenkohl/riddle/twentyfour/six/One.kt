@@ -11,7 +11,7 @@ class One : Both() {
 
     lateinit var visited: MutableList<Pair<Position, Direction>>
 
-    override fun solve(input: String): String {
+    override fun solve(input: String): Long {
         val area = input.rows().columns().positions()
 
         visited = mutableListOf(area.guard() to Direction.NORTH)
@@ -31,7 +31,7 @@ class One : Both() {
             visited.add(next)
         }
 
-        return visited.map { it.first }.toSet().size.toString()
+        return visited.map { it.first }.toSet().size.toLong()
     }
 
     private fun Pair<Position, Direction>.position(): Position {

@@ -15,7 +15,7 @@ class Second : Both() {
         private val DONT_REGEX = "don't\\(\\)".toRegex()
     }
 
-    override fun solve(input: String): String {
+    override fun solve(input: String): Long {
         val dontPartsWithTrailingDo = DONT_REGEX.split(input)
         val dontParts = dontPartsWithTrailingDo.filterIndexed { index, _ -> index != 0 }
         val doInDontParts = dontParts.map(DO_REGEX::split).filter { it.size > 1 }.map { it.slice(1 until it.size) }
